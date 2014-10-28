@@ -1,0 +1,23 @@
+SHELL=/bin/bash
+MAILTO=zemiak@gmail.com
+
+# minute hour day-of-month month day-of-week
+
+# podcast download system, 3:15am almost daily
+15 3 * * mon vasko cd /Users/vasko/podcasts && /usr/bin/php download-podcast.php signall
+15 3 * * wed vasko cd /Users/vasko/podcasts && /usr/bin/php download-podcast.php experimental
+15 3 * * fri vasko cd /Users/vasko/podcasts && /usr/bin/php download-podcast.php selector
+15 3 * * sat vasko cd /Users/vasko/podcasts && /usr/bin/php download-podcast.php balaz_hubinak
+15 3 * * sun vasko cd /Users/vasko/podcasts && /usr/bin/php download-podcast.php wilsonic
+
+# Headbanger - direct recording
+55 21 * * mon vasko cd /Users/vasko/podcasts && /usr/bin/php download-podcast.php headbanger
+
+# remove old podcasts
+15 1 * * * root cd /Users/vasko/podcasts && bash remove-old-podcasts.bash
+
+#15 3 * * wed vasko cd /Users/vasko/podcasts && /usr/bin/php download-podcast.php pohoda
+#15 3 * * sun vasko cd /Users/vasko/podcasts && /usr/bin/php download-podcast.php exclusive
+#15 3 * * sat vasko cd /Users/vasko/podcasts && /usr/bin/php download-podcast.php 4elements
+
+@reboot root cd /Users/vasko/bin && /bin/bash on-reboot.bash

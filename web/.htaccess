@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteBase /
+RewriteRule ^(.*).mp3$ /podcasts/podcast.php?file=$1.mp3
