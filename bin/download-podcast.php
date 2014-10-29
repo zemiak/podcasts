@@ -98,11 +98,11 @@ class DownloadPodcast
      */
     protected $kyberiaPodcasts = array(
         'nuSpirit' => array(0, '2000', 'Jazz'),            // Sunday 20:00
-        'wilsonic' => array(6, '2200', 'Electronic'),      // Saturday 22:00
-        'exclusive' => array(6, '2000', 'Other'),          // Saturday 20:00
-        '4elements' => array(5, '2100', 'Techno'),         // Friday 21:00
+        'wilsonic' => array(0, '0000', 'Electronic'),      // Sunday 00:00
+        'exclusive' => array(6, '2200', 'Other'),          // Saturday 22:00
+        'fresh' => array(5, '2100', 'Techno'),             // Friday 21:00
         'balaz_hubinak' => array(5, '1800', 'Speech'),     // Friday 18:00
-        'selector' => array(4, '2000', 'BritPop'),         // Thursday 20:00
+        'selector' => array(6, '2000', 'BritPop'),         // Saturday 20:00
         'experimental' => array(2, '2200', 'Alternative'), // Tuesday 22:00
         'pohoda' => array(2, '2000', 'Alternative'),       // Tuesday 20:00
         'hudba_sveta' => array(1, '2000', 'Ethnic')        // Monday 20:00
