@@ -7,6 +7,7 @@ class Podcast
     const PATH = '/mnt/media/inbox/';
     private $podcast = null;
     private $files = array();
+    private $server = "http://lenovo-server.local:8083";
 
     public function setPodcastName($podcast)
     {
@@ -75,7 +76,7 @@ class Podcast
  xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\">
 
 <channel>
-<atom:link href=\"/podcasts/podcast.php?podcast={$this->podcast}\" rel=\"self\" type=\"application/rss+xml\" />
+<atom:link href=\"{$this->server}/podcasts/podcast.php?podcast={$this->podcast}\" rel=\"self\" type=\"application/rss+xml\" />
 <title>{$this->getField('title')}</title>
 <link>http://www.radiofm.sk/</link>
 <description>{$this->getField('desc')}</description>
