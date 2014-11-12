@@ -75,7 +75,7 @@ class Podcast
  xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\">
 
 <channel>
-<atom:link href=\"http://mekbuk-server.local/podcasts/podcast.php?podcast={$this->podcast}\" rel=\"self\" type=\"application/rss+xml\" />
+<atom:link href=\"/podcasts/podcast.php?podcast={$this->podcast}\" rel=\"self\" type=\"application/rss+xml\" />
 <title>{$this->getField('title')}</title>
 <link>http://www.radiofm.sk/</link>
 <description>{$this->getField('desc')}</description>
@@ -132,7 +132,7 @@ class Podcast
         $duration = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds); // 00:24:30
         $guid = md5(implode(':', array($entry, $length, $duration)));
 
-        $url = "http://mekbuk-server.local/podcasts/" . $entry;
+        $url = "/podcasts/" . $entry;
 
         $xml ="\n\n<item>
         <title>{$week}:{$this->getField('title')}</title>
@@ -289,7 +289,7 @@ class Podcast
 <ul>\n";
 
         foreach (self::$data as $key => $row) {
-            $url = "http://mekbuk-server.local/podcasts/podcast.php?podcast=" . $key;
+            $url = "/podcasts/podcast.php?podcast=" . $key;
             echo "    <li><a href=\"{$url}\">{$row['title']}</a>\n";
         }
 
