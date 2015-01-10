@@ -7,7 +7,7 @@ class Podcast
     const PATH = '/mnt/media/inbox/';
     private $podcast = null;
     private $files = array();
-    private $server = "http://lenovo-server.local:8083";
+    private $server = "http://lenovo-server.local:8081";
 
     public function setPodcastName($podcast)
     {
@@ -133,7 +133,7 @@ class Podcast
         $duration = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds); // 00:24:30
         $guid = md5(implode(':', array($entry, $length, $duration)));
 
-        $url = "/podcasts/" . $entry;
+        $url = "/podcasts/podcast.php?file=" . $entry;
 
         $xml ="\n\n<item>
         <title>{$week}:{$this->getField('title')}</title>
