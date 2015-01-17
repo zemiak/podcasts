@@ -2,16 +2,16 @@ SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=zemiak@gmail.com
 
-#15 3 * * mon sites cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php signall
-#15 3 * * wed sites cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php experimental
-#15 3 * * fri sites cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php selector
-#58 21 * * mon sites cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php headbanger
-#15 3 * * wed sites cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php pohoda
-#15 3 * * sun sites cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php exclusive
-#15 3 * * sat sites cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php fresh
-#15 3 * * sun sites cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php wilsonic
+#15 3 * * mon root cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php signall
+#15 3 * * wed root cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php experimental
+#15 3 * * fri root cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php selector
+#58 21 * * mon root cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php headbanger
+#15 3 * * wed root cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php pohoda
+#15 3 * * sun root cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php exclusive
+#15 3 * * sat root cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php fresh
+#15 3 * * sun root cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php wilsonic
 
-15 3 * * sat sites cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php balaz_hubinak
+15 3 * * sat root cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php balaz_hubinak
 
 # remove old podcasts
-15 1 * * * sites cd /var/lib/podcasts/bin && bash remove-old-podcasts.bash >/dev/null
+15 1 * * * root cd /var/lib/podcasts/bin && bash remove-old-podcasts.bash >/dev/null
