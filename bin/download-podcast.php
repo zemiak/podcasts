@@ -42,7 +42,7 @@ class DownloadPodcast
      */
     protected function getDestination()
     {
-        return self::BASE_DESTINATION . $this->date->format('Y-m-d') . "_{$this->podcast}.mp3";
+        return self::BASE_DESTINATION . $this->date->format('ymd') . "_{$this->podcast}.mp3";
     }
 
     /**
@@ -84,9 +84,9 @@ class DownloadPodcast
      * Support for direct recording from the Radio_FM stream
      */
     protected $recordPodcasts = array(
-	'balaz_hubinak' => (5, 3h, 'Speech'),
-	'od_veci' => (4, 2h, 'Speech'),
-        'test-record' => array(1, '1s', 'Metal')
+	'balaz_hubinak' => array(5, '3h', 'Speech'),
+	'od_veci' => array(4, '2h', 'Speech'),
+        'test-record' => array(1, '10s', 'Metal')
         );
     protected function record()
     {
