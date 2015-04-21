@@ -81,50 +81,11 @@ class DownloadPodcast
     }
 
     /**
-     * Support for Signall_FM
-     */
-    protected $niekdePodcasts = array('signall' => true);
-    protected function niekde()
-    {
-        $this->date = $this->findLastDow(0); // Sunday
-        $this->url = 'http://signallfm.niekde.sk/streams/[signall_FM] '
-            . $this->date->format('Y-m-d')
-            . " 215501.mp3";
-        $this->genre = 'Drum & Bass';
-    }
-
-    /**
-     * Support for Kyberia
-     */
-    protected $kyberiaPodcasts = array(
-        'nuSpirit' => array(0, '2000', 'Jazz'),            // Sunday 20:00
-        'wilsonic' => array(0, '0000', 'Electronic'),      // Sunday 00:00
-        'exclusive' => array(6, '2200', 'Other'),          // Saturday 22:00
-        'fresh' => array(5, '2100', 'Techno'),             // Friday 21:00
-        'balaz_hubinak' => array(5, '1800', 'Speech'),     // Friday 18:00
-        'selector' => array(6, '2000', 'BritPop'),         // Saturday 20:00
-        'experimental' => array(2, '2200', 'Alternative'), // Tuesday 22:00
-        'pohoda' => array(2, '2000', 'Alternative'),       // Tuesday 20:00
-        'hudba_sveta' => array(1, '2000', 'Ethnic')        // Monday 20:00
-        );
-    protected function kyberia()
-    {
-        $day = $this->kyberiaPodcasts[$this->podcast][0];
-        $time = $this->kyberiaPodcasts[$this->podcast][1];
-        if (isset($this->kyberiaPodcasts[$this->podcast][2])) {
-            $this->genre = $this->kyberiaPodcasts[$this->podcast][2];
-        }
-
-        $this->date = $this->findLastDow($day);
-        $this->url = "http://radio-fm.kyberia.net/mp3/fm_{$this->podcast}_"
-            . $this->date->format('dmY') . "{$time}.mp3";
-    }
-
-    /**
      * Support for direct recording from the Radio_FM stream
      */
     protected $recordPodcasts = array(
-        'headbanger' => array(1, '2h', 'Metal'),  // Monday, duration 2 hours
+	'balaz_hubinak' => (5, 3h, 'Speech'),
+	'od_veci' => (4, 2h, 'Speech'),
         'test-record' => array(1, '1s', 'Metal')
         );
     protected function record()
@@ -164,13 +125,9 @@ class DownloadPodcast
     {
         $this->podcast = $podcast;
 
-        if (isset($this->niekdePodcasts[$podcast])) {
-            $this->niekde();
-        } elseif (isset($this->kyberiaPodcasts[$podcast])) {
-            $this->kyberia();
-        } elseif (isset($this->recordPodcasts[$podcast])) {
-	        $this->record();
-	    } else {
+        if (isset($this->recordPodcasts[$podcast])) {
+	    $this->record();
+	} else {
             echo "Unknown podcast {$this->podcast}\n";
             die();
         }
