@@ -1,10 +1,8 @@
-SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=zemiak@gmail.com
 
 03 18 * * fri root cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php balaz_hubinak
 59 19 * * thu root cd /var/lib/podcasts/bin && /usr/bin/php download-podcast.php od_veci
-
+* * * * * root date >/tmp/podcasts-date
 
 # remove old podcasts
-15 1 * * * root cd /var/lib/podcasts/bin && bash remove-old-podcasts.bash >/dev/null
+15 1 * * * root cd /var/lib/podcasts/bin && /bin/bash remove-old-podcasts.bash >/dev/null
