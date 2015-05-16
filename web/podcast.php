@@ -107,7 +107,8 @@ class Podcast
 
     private function generateFileInfo($entry)
     {
-        $date = strtotime(substr($entry, 0, 10));
+        $dateString = "20" . substr($entry, 0, 2) . "-" . substr($entry, 2, 2) . "-" . substr($entry, 4, 2);
+        $date = strtotime($dateString);
         $week = date('W', $date);
 
         $length = filesize(self::PATH . $entry);
