@@ -1,0 +1,4 @@
+connect
+/subsystem=mail/mail-session=PodcastsMail:add(jndi-name="java\:\/podcasts\/mail\/default")
+/subsystem=mail/mail-session=PodcastsMail/server=smtp:add(outbound-socket-binding-ref=mail-smtp)
+reload
