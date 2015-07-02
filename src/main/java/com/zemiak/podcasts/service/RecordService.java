@@ -5,7 +5,9 @@ import com.zemiak.podcasts.domain.Podcast;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.mail.Session;
 
 public class RecordService {
     @Inject
@@ -13,6 +15,9 @@ public class RecordService {
 
     @Inject
     Mp3Tagger tagger;
+
+    @Resource(name = "java:/podcasts/mail/default")
+    private Session mailSession;
 
     Date now;
 
@@ -27,7 +32,10 @@ public class RecordService {
         Recorder recorder = new Recorder(radioFmUrl, outputFileName, podcast.getDurationSeconds());
         recorder.run();
 
-        return tagger.createId3Tag(outputFileName, podcast, now);
+        Episode episode = tagger.createId3Tag(outputFileName, podcast, now);
+        sendInfoMail(episode);
+
+        return episode;
     }
 
     private String getOutputFileName(Podcast podcast) {
