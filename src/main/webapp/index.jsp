@@ -15,7 +15,7 @@
         <ul>
         <c:forEach var="item" items="${podcasts.podcasts}">
             <li>
-                <a href="/podcasts/feed.jsp?name=${item.name}/feed">
+                <a href="/podcasts/feed.jsp?name=${item.name}">
                     ${item.title}
                 </a>
             </li>

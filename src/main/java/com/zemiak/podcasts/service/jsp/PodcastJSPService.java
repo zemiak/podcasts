@@ -37,7 +37,7 @@ public class PodcastJSPService {
         return podcast;
     }
 
-    public static String getNow() {
+    public String getNow() {
         return getNow(new Date().getTime());
     }
 

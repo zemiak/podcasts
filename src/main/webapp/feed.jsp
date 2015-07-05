@@ -3,10 +3,7 @@
 
 <jsp:useBean id="podcasts" scope="request" class="com.zemiak.podcasts.service.jsp.PodcastJSPService" />
 
-<%
-    podcasts.setPodcastName(request);
-%>
-
+<% podcasts.setPodcastName(request); %>
 <?xml version="1.0" encoding="utf-8" ?>
 <rss version="2.0"
     xmlns:atom="http://www.w3.org/2005/Atom"

@@ -4,6 +4,7 @@ import com.zemiak.podcasts.domain.Episode;
 import com.zemiak.podcasts.domain.Podcast;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +37,10 @@ public class PodcastService {
         podcast.setDescription("Program s autorskou dvojicou Daniel Baláž a Pavol Hubinák. Zábava, recesia, glosovanie aktuálnych udalostí a atypická hudobná dramaturgia. Pravidelné rubriky a interakcia s poslucháčmi. Čokoľvek, čo nečakáte.");
         podcast.setPicture("http://static.etrend.sk/uploads/tx_media/2011/12/12/balaz_a_hubinak_radio_fm.jpg");
         podcast.setDurationSeconds(3 * HOUR);
-        podcast.setEpisodes(getPodcastEpisodes(podcast));
         podcast.setDayOfWeek("fri");
         podcast.setHour(18);
         podcast.setMinute(3);
+        podcast.setEpisodes(getPodcastEpisodes(podcast));
 
         return podcast;
     }
@@ -51,10 +52,10 @@ public class PodcastService {
         podcast.setDescription("Tomáš Hudák a Ludwig Bagin rozoberajú aktuálne témy a nadhadzujú tak tematickú korisť trojici Jurajovi „Šokovi“ Tabačkovi, Stanovi Staškovi a Lukášovi „Puchovi\" Puchovskému (známi z 3T). Nalaďte sa každý nepárny štvrtok od 20:00 do 22:00.");
         podcast.setPicture("http://static.hudba.zoznam.sk/media/obrazky/magazin/galeria/58972/od-veci_fm-nova-humoristicka-relacia.jpg");
         podcast.setDurationSeconds(2 * HOUR);
-        podcast.setEpisodes(getPodcastEpisodes(podcast));
         podcast.setDayOfWeek("thu");
         podcast.setHour(19);
         podcast.setMinute(59);
+        podcast.setEpisodes(getPodcastEpisodes(podcast));
 
         return podcast;
     }
@@ -66,10 +67,10 @@ public class PodcastService {
         podcast.setDescription("Testing 10 minutes");
         podcast.setPicture("");
         podcast.setDurationSeconds(0);
-        podcast.setEpisodes(getPodcastEpisodes(podcast));
         podcast.setDayOfWeek("*");
         podcast.setHour(1);
         podcast.setMinute(2);
+        podcast.setEpisodes(getPodcastEpisodes(podcast));
 
         return podcast;
     }
@@ -78,11 +79,21 @@ public class PodcastService {
         List<Episode> episodes = new ArrayList<>();
 
         try {
-            episodes.addAll(Files.walk(Paths.get(path))
-                    .filter(file -> file.getFileName().endsWith(".mp3"))
-                    .filter(file -> file.getFileName().toString().contains(podcast.getName()))
-                    .map(file -> new Episode(podcast, file))
-                    .collect(Collectors.toList()));
+            String podcastName = podcast.getName();
+            for (Path file: Files.walk(Paths.get(path)).collect(Collectors.toList())) {
+                String fileName = file.getFileName().toString();
+
+                if (fileName.endsWith(".mp3") && fileName.contains(podcastName)) {
+                    Episode episode = new Episode(podcast, file);
+                    episodes.add(episode);
+                }
+            }
+
+//            episodes.addAll(Files.walk(Paths.get(path))
+//                    .filter(file -> file.getFileName().endsWith(".mp3"))
+//                    .filter(file -> file.getFileName().toString().contains(podcast.getName()))
+//                    .map(file -> new Episode(podcast, file))
+//                    .collect(Collectors.toList()));
         } catch (IOException ex) {
             LOG.log(Level.SEVERE, "Cannot walk the path {0}", path);
             throw new IllegalStateException(ex);
