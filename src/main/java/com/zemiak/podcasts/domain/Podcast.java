@@ -2,7 +2,12 @@ package com.zemiak.podcasts.domain;
 
 import java.util.List;
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Podcast {
     private String name;
     private String description;
@@ -12,6 +17,7 @@ public class Podcast {
     private String dayOfWeek;
     private int hour;
     private List<Episode> episodes;
+    private int minute;
 
     public String getDayOfWeek() {
         return dayOfWeek;
@@ -36,7 +42,6 @@ public class Podcast {
     public void setMinute(int minute) {
         this.minute = minute;
     }
-    private int minute;
 
     public int getDurationSeconds() {
         return durationSeconds;

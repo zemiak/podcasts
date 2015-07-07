@@ -1,13 +1,11 @@
 package com.zemiak.podcasts.service;
 
-import com.mpatric.mp3agic.ID3v1Genres;
-import com.mpatric.mp3agic.ID3v1Tag;
-import com.mpatric.mp3agic.ID3v22Tag;
 import com.zemiak.podcasts.domain.Episode;
 import com.zemiak.podcasts.domain.Podcast;
 import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.Date;
+import org.farng.mp3.id3.ID3v1_1;
 
 public class Mp3Tagger {
     private static final String GENRE = "Speech";
@@ -19,26 +17,16 @@ public class Mp3Tagger {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(now);
 
-        ID3v1Tag tag = new ID3v1Tag();
+        ID3v1_1 tag = episode.getTag();
         tag.setAlbum(podcast.getTitle());
         tag.setArtist(ARTIST);
-        tag.setGenre(ID3v1Genres.matchGenreDescription(GENRE));
+        tag.setSongGenre(GENRE);
         tag.setYear(String.valueOf(calendar.get(Calendar.YEAR)));
-        tag.setTrack(String.valueOf(calendar.get(Calendar.WEEK_OF_YEAR)));
+        tag.setTrackNumberOnAlbum(String.valueOf(calendar.get(Calendar.WEEK_OF_YEAR)));
         tag.setTitle(String.valueOf(calendar.get(Calendar.WEEK_OF_YEAR)) + " " + podcast.getTitle());
 
-        episode.getMp3File().setId3v1Tag(tag);
+        episode.saveTag();
 
-        ID3v22Tag tag2 = new ID3v22Tag();
-        tag2.setAlbum(podcast.getTitle());
-        tag2.setArtist(ARTIST);
-        tag2.setGenre(ID3v1Genres.matchGenreDescription(GENRE));
-        tag2.setYear(String.valueOf(calendar.get(Calendar.YEAR)));
-        tag2.setTrack(String.valueOf(calendar.get(Calendar.WEEK_OF_YEAR)));
-        tag2.setTitle(String.valueOf(calendar.get(Calendar.WEEK_OF_YEAR)) + " " + podcast.getTitle());
-
-        episode.getMp3File().setId3v2Tag(tag2);
-        
         return episode;
     }
 }
