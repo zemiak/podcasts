@@ -2,24 +2,15 @@ package com.zemiak.podcasts.service;
 
 import com.zemiak.podcasts.domain.Episode;
 import com.zemiak.podcasts.domain.Podcast;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import javax.inject.Inject;
 
 public class PodcastService {
     private static final int MINUTE = 60;
     private static final int HOUR = MINUTE * 60;
     private static final Logger LOG = Logger.getLogger(PodcastService.class.getName());
-
-    @Inject
-    private String path;
 
     public List<Podcast> getPodcasts() {
         List<Podcast> podcasts = new ArrayList<>();
@@ -40,7 +31,6 @@ public class PodcastService {
         podcast.setDayOfWeek("fri");
         podcast.setHour(18);
         podcast.setMinute(3);
-        podcast.setEpisodes(getPodcastEpisodes(podcast));
 
         return podcast;
     }
@@ -55,7 +45,6 @@ public class PodcastService {
         podcast.setDayOfWeek("thu");
         podcast.setHour(19);
         podcast.setMinute(59);
-        podcast.setEpisodes(getPodcastEpisodes(podcast));
 
         return podcast;
     }
@@ -70,36 +59,8 @@ public class PodcastService {
         podcast.setDayOfWeek("*");
         podcast.setHour(1);
         podcast.setMinute(2);
-        podcast.setEpisodes(getPodcastEpisodes(podcast));
 
         return podcast;
-    }
-
-    private List<Episode> getPodcastEpisodes(Podcast podcast) {
-        List<Episode> episodes = new ArrayList<>();
-
-        try {
-            String podcastName = podcast.getName();
-            for (Path file: Files.walk(Paths.get(path)).collect(Collectors.toList())) {
-                String fileName = file.getFileName().toString();
-
-                if (fileName.endsWith(".mp3") && fileName.contains(podcastName)) {
-                    Episode episode = new Episode(podcast, file);
-                    episodes.add(episode);
-                }
-            }
-
-//            episodes.addAll(Files.walk(Paths.get(path))
-//                    .filter(file -> file.getFileName().endsWith(".mp3"))
-//                    .filter(file -> file.getFileName().toString().contains(podcast.getName()))
-//                    .map(file -> new Episode(podcast, file))
-//                    .collect(Collectors.toList()));
-        } catch (IOException ex) {
-            LOG.log(Level.SEVERE, "Cannot walk the path {0}", path);
-            throw new IllegalStateException(ex);
-        }
-
-        return episodes;
     }
 
     public Podcast find(String podcastName) {

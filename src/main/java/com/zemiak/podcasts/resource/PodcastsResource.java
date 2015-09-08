@@ -2,18 +2,14 @@ package com.zemiak.podcasts.resource;
 
 import com.zemiak.podcasts.domain.Episode;
 import com.zemiak.podcasts.domain.Podcast;
+import com.zemiak.podcasts.service.EpisodeService;
 import com.zemiak.podcasts.service.PodcastService;
 import com.zemiak.podcasts.service.RecordService;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 @Path("podcasts")
@@ -22,6 +18,9 @@ import javax.ws.rs.core.Response;
 public class PodcastsResource {
     @Inject
     PodcastService podcasts;
+
+    @Inject
+    EpisodeService episodes;
 
     @Inject
     RecordService recorder;
@@ -39,7 +38,7 @@ public class PodcastsResource {
             return Response.status(Response.Status.NOT_FOUND).entity("Cannot find podcast " + name).build();
         }
 
-        return Response.ok().entity(podcast.getEpisodes()).build();
+        return Response.ok().entity(episodes.getEpisodes(podcast)).build();
     }
 
     @POST

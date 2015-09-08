@@ -2,6 +2,8 @@ package com.zemiak.podcasts.service;
 
 import com.zemiak.podcasts.domain.Episode;
 import com.zemiak.podcasts.domain.Podcast;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -23,7 +25,7 @@ public class RecordService {
     String radioFmUrl;
 
     @Inject
-    Mp3Tagger tagger;
+    EpisodeService service;
 
     @Resource(name = "java:/podcasts/mail/default")
     private Session mailSession;
@@ -50,7 +52,8 @@ public class RecordService {
         Recorder recorder = new Recorder(radioFmUrl, outputFileName, podcast.getDurationSeconds());
         recorder.run();
 
-        Episode episode = tagger.createId3Tag(outputFileName, podcast, now);
+        Path outputPath = Paths.get(outputFileName);
+        Episode episode = service.create(podcast, outputPath);
 
         try {
             sendInfoMail(episode);
