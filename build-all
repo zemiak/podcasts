@@ -3,7 +3,7 @@
 mvn -q package 
 if [ $? -eq 0 ]
 then
-    rm ~/bin/wildfly8/standalone/deployments/podcasts.war*
-    cp ./target/podcasts.war ~/bin/wildfly8/standalone/deployments/
+    rm ~/bin/wildfly/standalone/deployments/podcasts.war*
+    cp ./target/podcasts.war ~/bin/wildfly/standalone/deployments/
     echo Deployed.
 fi
