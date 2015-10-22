@@ -1,6 +1,6 @@
 #!/bin/sh
 
-WILDFLY=wildfly-10.0.0.CR2
+WILDFLY=wildfly-10.0.0.CR3
 PROJECT=~/Documents/projects/podcasts
 DOWNLOAD=~/Downloads/$WILDFLY.zip
 INSTALL=~/bin
