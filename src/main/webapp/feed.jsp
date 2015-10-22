@@ -1,16 +1,10 @@
-<%@page contentType="application/rss+xml" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<jsp:useBean id="podcasts" scope="request" class="com.zemiak.podcasts.service.jsp.PodcastJSPService" />
-
-<% podcasts.setPodcastName(request); %>
-<?xml version="1.0" encoding="utf-8" ?>
+<%@page contentType="application/rss+xml" pageEncoding="UTF-8"%><%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><?xml version="1.0" encoding="utf-8" ?>
 <rss version="2.0"
     xmlns:atom="http://www.w3.org/2005/Atom"
     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/">
-
+    <jsp:useBean id="podcasts" scope="request" class="com.zemiak.podcasts.service.jsp.PodcastJSPService" /><% podcasts.setPodcastName(request); %>
     <channel>
         <atom:link href="/podcasts/feed.jsp?name=${podcasts.podcast.name}" rel="self" type="application/rss+xml" />
         <title>${podcasts.podcast.title}</title>
