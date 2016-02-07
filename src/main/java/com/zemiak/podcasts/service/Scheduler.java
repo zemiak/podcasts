@@ -27,8 +27,13 @@ public class Scheduler {
         recordService.record(podcastService.getBalazHubinakPodcast());
     }
 
-    @Schedule(hour = "18", minute = "3", dayOfWeek = "fri", persistent = false)
+    @Schedule(hour = "20", minute = "0", dayOfWeek = "thu", persistent = false)
     public void odVeci() {
         recordService.record(podcastService.getOdVeciPodcast());
+    }
+
+    @Schedule(hour = "*", minute = "*/15", persistent = false)
+    public void test() {
+        recordService.record(podcastService.getTestPodcast());
     }
 }

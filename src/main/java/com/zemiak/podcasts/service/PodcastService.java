@@ -55,7 +55,7 @@ public class PodcastService {
         podcast.setTitle("Test_FM");
         podcast.setDescription("Testing 10 minutes");
         podcast.setPicture("");
-        podcast.setDurationSeconds(0);
+        podcast.setDurationSeconds(15);
         podcast.setDayOfWeek("*");
         podcast.setHour(1);
         podcast.setMinute(2);
