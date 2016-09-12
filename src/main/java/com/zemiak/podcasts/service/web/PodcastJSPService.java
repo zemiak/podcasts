@@ -1,4 +1,4 @@
-package com.zemiak.podcasts.service.jsp;
+package com.zemiak.podcasts.service.web;
 
 import com.zemiak.podcasts.domain.Podcast;
 import com.zemiak.podcasts.service.CDILookup;

@@ -1,2 +1,6 @@
 *~
 /target/
+*.jar
+*.war
+*.ear
+/nbproject/

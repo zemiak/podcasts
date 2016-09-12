@@ -1,6 +1,6 @@
 package com.zemiak.podcasts.domain;
 
-import com.zemiak.podcasts.service.jsp.PodcastJSPService;
+import com.zemiak.podcasts.service.web.PodcastJSPService;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.attribute.FileTime;

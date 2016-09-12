@@ -21,5 +21,8 @@
             </li>
         </c:forEach>
         </ul>
+        
+        <h1>Configuration</h1>
+        <a href="/podcasts/config.xhtml">Click here for Podcasts configuration</a>
     </body>
 </html>

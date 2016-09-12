@@ -1,5 +1,6 @@
 package com.zemiak.podcasts.domain;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,39 +9,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Podcast {
+public class Podcast implements Serializable {
     private String name;
     private String description;
     private String picture;
     private String title;
     private int durationSeconds;
-    private String dayOfWeek;
-    private int hour;
     private List<Episode> episodes;
-    private int minute;
+    private boolean enabled;
+    private String cronExpression;
 
-    public String getDayOfWeek() {
-        return dayOfWeek;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setDayOfWeek(String dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
-    }
-
-    public int getHour() {
-        return hour;
-    }
-
-    public void setHour(int hour) {
-        this.hour = hour;
-    }
-
-    public int getMinute() {
-        return minute;
-    }
-
-    public void setMinute(int minute) {
-        this.minute = minute;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public int getDurationSeconds() {
@@ -114,5 +98,13 @@ public class Podcast {
 
     public void setEpisodes(List<Episode> episodes) {
         this.episodes = episodes;
+    }
+
+    public String getCronExpression() {
+        return cronExpression;
+    }
+
+    public void setCronExpression(String cronExpression) {
+        this.cronExpression = cronExpression;
     }
 }

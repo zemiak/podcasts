@@ -1,0 +1,21 @@
+.page {
+    width: 100%;
+}
+
+.small-panel {
+    padding-bottom: 0px;
+}
+
+a.item.small-icon-anchor {
+    padding: 5px;
+}
+
+.icon-bar > * i.small-icon {
+    font-size: 1em;
+}
+
+i.fi-arrow-left.movies-back-icon {
+    font-size: 1.25em; 
+    vertical-align: top; 
+    color: green;
+}

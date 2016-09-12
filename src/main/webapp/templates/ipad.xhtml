@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://java.sun.com/jsf">
+
+    <head jsf:id="head">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        
+        <link href="#{request.contextPath}/js/libs/foundation/css/normalize.css" rel="stylesheet" />
+        <link href="#{request.contextPath}/js/libs/foundation/css/foundation.css" rel="stylesheet" />
+        <link href="#{request.contextPath}/js/libs/foundation/icons/foundation-icons.css" rel="stylesheet" />
+        <link href="#{request.contextPath}/css/podcasts.css" rel="stylesheet" />
+        
+        <link rel="shortcut icon" href="../icons/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" sizes="1024x1024"
+              href="../icons/icon-1024.jpg" />
+        <link rel="apple-touch-icon-precomposed" sizes="512x512"
+              href="../icons/icon-512.jpg" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144"
+              href="../icons/icon-144.jpg" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114"
+              href="../icons/icon-114.jpg" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72"
+              href="../icons/icon-72.jpg" />
+        <link rel="apple-touch-icon-precomposed" href="../icons/icon-57.jpg" />
+
+        <script type="text/javascript" src="#{request.contextPath}/js/libs/foundation/js/vendor/modernizr.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/js/libs/foundation/js/vendor/jquery.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/js/libs/foundation/js/vendor/fastclick.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/js/libs/foundation/js/foundation.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/js/foundation.alert.js"></script>
+    </head>
+
+    <body jsf:id="body">
+        <h:messages errorClass="alert-box alert" infoClass="alert-box success" warnClass="alert-box warning"/>
+        
+        <div class="panel small-panel">
+            <div class="row">
+                <div class="small-4 columns">
+                    <h3><ui:insert name="header">Default Header</ui:insert></h3>
+                </div>
+                
+                <div class="small-5 columns">
+                    <input type="text" id="searchQuery" placeholder="Search for..." />
+                </div>
+                
+                <div class="small-3 columns">
+                    <div class="icon-bar small three-up" role="navigation">
+                        <a class="item small-icon-anchor" role="button" tabindex="0" aria-label="home" href="javascript:window.location=searchUrl();">
+                            <i class="fi-filter small-icon"></i>
+                        </a>
+                        
+                        <a class="item small-icon-anchor" role="button" tabindex="0" aria-label="home" href="#{request.contextPath}/ipad/index.xhtml">
+                            <i class="fi-home small-icon"></i>
+                        </a>
+
+                        <a class="item small-icon-anchor" role="button" tabindex="1" aria-label="system" href="#{request.contextPath}/admin/system/index.xhtml">
+                            <i class="fi-widget small-icon"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ui:insert name="body"/>
+
+        <script>
+            $(document).foundation();
+        </script>
+    </body>
+</html>
