@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 @Named
 @RequestScoped
 public class PodcastJSPService {
-    private PodcastService podcasts;
+    private final PodcastService podcasts;
     private Podcast podcast;
 
     public PodcastJSPService() {

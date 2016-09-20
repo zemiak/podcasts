@@ -59,7 +59,7 @@ public class PodcastService {
         podcast.setTitle(props.getString(name + ".title"));
         podcast.setDescription(props.getString(name + ".description"));
         podcast.setPicture(props.getString(name + ".picture"));
-        podcast.setDurationSeconds(Integer.valueOf(props.getString(name + ".title")));
+        podcast.setDurationSeconds(Integer.valueOf(props.getString(name + ".duration")));
         podcast.setCronExpression(props.getString(name + ".cron"));
         podcast.setEnabled(props.getString(name + ".enabled").equals("true"));
 

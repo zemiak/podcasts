@@ -3,21 +3,29 @@
 #mvn -q clean || exit 1
 #mvn -q integration-test || exit 2
 mvn -q package  || exit 3
-if [ $? -eq 0 ]
-then
-    eval $(docker-machine env)
-    cp ./target/podcasts.war ./src/main/setup/docker/
-    cd ./src/main/setup/docker
-    docker kill podcasts-dev
-    docker rm -f podcasts-dev
-    docker build --tag podcasts-dev . || exit 4
 
-    echo "#!/bin/sh" >/tmp/run-podcasts.sh
-    printf -- "docker run -d -p 8080:8080 -p 8787:8787 -p 9990:9990 -p 2200:22 " >>/tmp/run-podcasts.sh
-    printf -- "-v /home/docker/media/inbox:/mnt/media/inbox " >>/tmp/run-podcasts.sh
-    printf -- "--name=podcasts-dev " >>/tmp/run-podcasts.sh
-    echo "podcasts-dev" >>/tmp/run-podcasts.sh
-    docker-machine scp localhost:/tmp/run-podcasts.sh default:/tmp/
-    docker-machine ssh default "sh /tmp/run-podcasts.sh"
-    cd ../../../..
-fi
+WILDFLY=wildfly-10.1.0.Final
+PROJECT=~/Documents/projects/podcasts
+DOWNLOAD=~/Downloads/$WILDFLY.zip
+INSTALL=~/bin
+TARGET=wildfly
+
+cd $INSTALL
+test -d $TARGET && rm -rf $TARGET
+cp $DOWNLOAD ./
+unzip $WILDFLY.zip >/dev/null
+rm $WILDFLY.zip
+mv $WILDFLY $TARGET
+cd $TARGET/standalone/configuration
+rm standalone*.xml
+cp $PROJECT/src/main/setup/standalone-dev.xml ./standalone.xml
+ln -s standalone.xml standalone-full.xml
+ln -s standalone.xml standalone-full-ha.xml
+ln -s standalone.xml standalone-ha.xml
+cd ../../..
+
+./$TARGET/bin/add-user.sh admin admin --silent
+
+cd $PROJECT
+cp target/podcasts.war ~/bin/wildfly/standalone/deployments/
+echo Done.

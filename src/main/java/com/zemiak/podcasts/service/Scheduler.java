@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.*;
 import javax.inject.Inject;
 
@@ -25,7 +26,7 @@ public class Scheduler {
     @Inject
     PodcastRemovalService removalService;
 
-    @Inject
+    @Resource
     TimerService timerService;
 
     final Map<Podcast, ScheduleEntry> planned = new HashMap<>();

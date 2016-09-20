@@ -1,4 +1,5 @@
 #!/bin/sh
 
 mvn -q package || exit 1
-sshpass -p docker scp -P 2200 target/podcasts.war vasko@192.168.99.100:/opt/wildfly/standalone/deployments/
+cp target/podcasts.war ~/bin/wildfly/standalone/deployments/
+echo Done.
