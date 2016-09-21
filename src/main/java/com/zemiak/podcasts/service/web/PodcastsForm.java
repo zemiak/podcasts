@@ -39,4 +39,12 @@ public class PodcastsForm {
     private void setEnabled(Podcast p) {
         service.find(p.getName()).setEnabled(true);
     }
+
+    public List<Podcast> getAllEnabled() {
+        return service.getPodcasts().stream().filter(Podcast::isEnabled).collect(Collectors.toList());
+    }
+
+    public List<Podcast> getAllDisabled() {
+        return service.getPodcasts().stream().filter(Podcast::isDisabled).collect(Collectors.toList());
+    }
 }

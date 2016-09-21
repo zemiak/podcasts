@@ -62,6 +62,7 @@ public class PodcastService {
         podcast.setDurationSeconds(Integer.valueOf(props.getString(name + ".duration")));
         podcast.setCronExpression(props.getString(name + ".cron"));
         podcast.setEnabled(props.getString(name + ".enabled").equals("true"));
+        podcast.setName(name);
 
         return podcast;
     }

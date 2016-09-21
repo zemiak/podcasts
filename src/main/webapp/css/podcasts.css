@@ -19,3 +19,7 @@ i.fi-arrow-left.movies-back-icon {
     vertical-align: top; 
     color: green;
 }
+
+.header {
+    background: lightgray;
+}

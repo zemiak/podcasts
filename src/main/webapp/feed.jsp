@@ -4,7 +4,7 @@
     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/">
-    <jsp:useBean id="podcasts" scope="request" class="com.zemiak.podcasts.service.jsp.PodcastJSPService" /><% podcasts.setPodcastName(request); %>
+    <jsp:useBean id="podcasts" scope="request" class="com.zemiak.podcasts.service.web.PodcastJSPService" /><% podcasts.setPodcastName(request); %>
     <channel>
         <atom:link href="/podcasts/feed.jsp?name=${podcasts.podcast.name}" rel="self" type="application/rss+xml" />
         <title>${podcasts.podcast.title}</title>
