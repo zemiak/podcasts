@@ -1,0 +1,23 @@
+#!/bin/sh
+
+SERVER="/Users/vasko/Downloads/payara-4.1.1.163.zip"
+FOLDER=payara41
+SAVE="$(pwd)"
+
+cd ~
+rm -rf "$FOLDER"
+unzip -qq "$SERVER"
+cd "$FOLDER"
+bin/asadmin start-domain domain1 || exit 1
+
+echo "AS_ADMIN_PASSWORD=" > payarapwd
+echo "AS_ADMIN_NEWPASSWORD=admin" >> payarapwd
+bin/asadmin --user=admin --passwordfile=payarapwd change-admin-password || exit 2
+echo "AS_ADMIN_PASSWORD=admin" > payarapwd
+
+DB_SERVER="zemiak-retina-macbook.local"
+bin/asadmin --user=admin --passwordfile=payarapwd create-javamail-resource --mailuser none --fromaddress noreply@nowhere.com --mailhost 192.168.2.10 mail/podcasts
+bin/asadmin --user=admin --passwordfile=payarapwd enable-secure-admin
+bin/asadmin --user=admin --passwordfile=payarapwd stop-domain domain1
+rm payarapwd
+cd "$SAVE"

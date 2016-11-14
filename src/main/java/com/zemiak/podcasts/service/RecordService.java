@@ -27,7 +27,7 @@ public class RecordService {
     @Inject
     EpisodeService service;
 
-    @Resource(name = "java:/podcasts/mail/default")
+    @Resource(name = "mail/podcasts")
     private Session mailSession;
 
     @Inject
