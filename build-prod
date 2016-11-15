@@ -1,9 +1,0 @@
-#/bin/sh
-
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/
-mvn -q clean || exit 1
-mvn -q integration-test || exit 2
-mvn -q clean || exit 3
-mvn -Pprod package || exit 4
-test -d ../docker/containers/podcasts && cp target/podcasts.war ../docker/containers/podcasts/
-echo "Done."

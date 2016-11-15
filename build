@@ -1,5 +1,0 @@
-#!/bin/sh
-
-mvn -q package || exit 1
-cp target/podcasts.war ~/bin/wildfly/standalone/deployments/
-echo Done.
