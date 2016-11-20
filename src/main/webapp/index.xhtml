@@ -21,70 +21,36 @@
                     <div class="small-2 columns">&nbsp;</div>
                 </div>
                 <div class="row">&nbsp;</div>
-                <ui:repeat var="item" value="#{podcastsForm.allEnabled}">
-                    <div class="row">
-                        <div class="small-4 columns">
-                            <a href="#{request.contextPath}/feed.jsp?name=${item.name}">
-                                ${item.title}
-                            </a>
-                        </div>
-                        
-                        <div class="small-2 columns">
-                            <input type="text" value="${item.cronExpression}" placeholder="CRON format..." />
-                        </div>
-                        
-                        <div class="small-2 columns">
-                            <input type="text" value="${item.durationSeconds}" placeholder="Duration in secs..." />
-                        </div>
-                        
-                        <div class="small-1 columns">
-                            <a href="#" class="button tiny">Update</a>
-                        </div>
-                        
-                        <div class="small-1 columns">
-                            <a href="#" class="button tiny">Disable</a>
-                        </div>
-                        
-                        <div class="small-2 columns">&nbsp;</div>
-                    </div>
-                </ui:repeat>
-                
-                <div class="row header">
-                    <div class="small-4 columns">Title</div>
-                    <div class="small-2 columns">Schedule</div>
-                    <div class="small-2 columns">Duration(s)</div>
-                    <div class="small-1 columns">&nbsp;</div>
-                    <div class="small-1 columns">&nbsp;</div>
-                    <div class="small-2 columns">&nbsp;</div>
-                </div>
-                <div class="row">&nbsp;</div>
-                <ui:repeat var="item" value="#{podcastsForm.allDisabled}">
-                    <div class="row">
-                        <div class="small-4 columns">
-                            <a href="#{request.contextPath}/feed.jsp?name=${item.name}">
-                                ${item.title}
-                            </a>
-                        </div>
-                        
-                        <div class="small-2 columns">
-                            <input type="text" value="${item.cronExpression}" placeholder="CRON format..." />
-                        </div>
-                        
-                        <div class="small-2 columns">
-                            <input type="text" value="${item.durationSeconds}" placeholder="Duration in secs..." />
-                        </div>
-                        
-                        <div class="small-1 columns">
-                            <a href="#" class="button tiny">Update</a>
-                        </div>
-                        
-                        <div class="small-1 columns">
-                            <a href="#" class="button tiny">Enable</a>
-                        </div>
-                        
-                        <div class="small-2 columns">&nbsp;</div>
-                    </div>
-                </ui:repeat>
+                    <h:form id="podcasts">
+                        <ui:repeat var="item" value="#{podcastsForm.all}">
+                            <div class="row">
+                                <div class="small-4 columns">
+                                    <a href="#{request.contextPath}/feed.jsp?name=${item.name}">
+                                        #{item.prettyTitle}
+                                    </a>
+                                </div>
+
+                                <div class="small-2 columns">
+                                    <h:inputText value="#{item.cronExpression}" id="cron" />
+                                </div>
+
+                                <div class="small-2 columns">
+                                    <h:inputText value="#{item.durationSeconds}" id="duration" />
+                                </div>
+
+                                <div class="small-1 columns">
+                                    <h:commandButton class="button tiny" action="#{podcastsForm.save(item.name)}" value="Update" />
+                                </div>
+
+                                <div class="small-1 columns">
+                                    <h:commandButton class="button tiny" action="#{podcastsForm.disable(item.name)}" value="Disable" rendered="#{item.enabled}" />
+                                    <h:commandButton class="button tiny" action="#{podcastsForm.enable(item.name)}" value="Enable" rendered="#{item.disabled}" />
+                                </div>
+
+                                <div class="small-2 columns">&nbsp;</div>
+                            </div>
+                        </ui:repeat>
+                    </h:form>
             </div>
         </ui:define>
     </ui:composition>

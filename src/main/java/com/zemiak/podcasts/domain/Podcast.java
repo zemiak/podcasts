@@ -18,6 +18,7 @@ public class Podcast implements Serializable {
     private List<Episode> episodes;
     private boolean enabled;
     private String cronExpression;
+    private int id;
 
     public boolean isEnabled() {
         return enabled;
@@ -110,5 +111,17 @@ public class Podcast implements Serializable {
 
     public void setCronExpression(String cronExpression) {
         this.cronExpression = cronExpression;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPrettyTitle() {
+        return title + (!enabled ? " (Disabled)" : "");
     }
 }

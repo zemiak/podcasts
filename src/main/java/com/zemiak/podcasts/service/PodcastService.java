@@ -24,8 +24,12 @@ public class PodcastService {
         String podcastsString = props.getString("podcasts");
         String[] podcastsArray = podcastsString.split(",");
 
+        int i = 0;
         for (String podcastName : podcastsArray) {
-            podcasts.add(readPodcast(props, podcastName));
+            Podcast podcast = readPodcast(props, podcastName);
+            podcast.setId(i);
+            podcasts.add(podcast);
+            i++;
         }
     }
 
@@ -36,6 +40,13 @@ public class PodcastService {
     public Podcast find(String podcastName) {
         return getPodcasts().stream()
                 .filter(p -> p.getName().equals(podcastName))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Podcast find(int id) {
+        return getPodcasts().stream()
+                .filter(p -> p.getId() == id)
                 .findFirst()
                 .orElse(null);
     }

@@ -2,11 +2,12 @@ package com.zemiak.podcasts.service.web;
 
 import com.zemiak.podcasts.domain.Podcast;
 import com.zemiak.podcasts.service.PodcastService;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -16,35 +17,49 @@ public class PodcastsForm {
     @Inject
     PodcastService service;
 
-    List<Podcast> selected = new ArrayList<>();
+    FacesContext faces;
 
     @PostConstruct
     public void init() {
-        selected = new ArrayList<>(service.getPodcasts().stream().filter(p -> p.isEnabled()).collect(Collectors.toList()));
+        faces = FacesContext.getCurrentInstance();
     }
 
-    public List<Podcast> getSelected() {
-        return selected;
+    public void save(String name) {
+        Podcast podcast = service.find(name);
+        String expression = getParam(podcast, "cron");
+        String duration = getParam(podcast, "duration");
+        podcast.setCronExpression(expression);
+        podcast.setDurationSeconds(Integer.valueOf(duration));
+
+        writeMessage(podcast.getTitle() + " has been updated.");
     }
 
-    public void setSelected(List<Podcast> selected) {
-        this.selected = new ArrayList<>(selected);
+    public void disable(String name) {
+        Podcast podcast = service.find(name);
+        podcast.setEnabled(false);
+
+        writeMessage(podcast.getTitle() + " has been disabled.");
     }
 
-    public void save() {
-        service.getPodcasts().stream().forEach(p -> p.setEnabled(false));
-        this.selected.stream().forEach(this::setEnabled);
+    public void enable(String name) {
+        Podcast podcast = service.find(name);
+        podcast.setEnabled(true);
+
+        writeMessage(podcast.getTitle() + " has been enabled.");
     }
 
-    private void setEnabled(Podcast p) {
-        service.find(p.getName()).setEnabled(true);
+    public List<Podcast> getAll() {
+        return service.getPodcasts();
     }
 
-    public List<Podcast> getAllEnabled() {
-        return service.getPodcasts().stream().filter(Podcast::isEnabled).collect(Collectors.toList());
+    private String getParam(Podcast podcast, String fieldName) {
+        Map<String, String> params = faces.getExternalContext().getRequestParameterMap();
+        String key = "podcasts:j_idt10:" + podcast.getId() + ":" + fieldName;
+        String value = params.get(key);
+        return value;
     }
 
-    public List<Podcast> getAllDisabled() {
-        return service.getPodcasts().stream().filter(Podcast::isDisabled).collect(Collectors.toList());
+    private void writeMessage(String message) {
+        faces.addMessage(null, new FacesMessage(message));
     }
 }
