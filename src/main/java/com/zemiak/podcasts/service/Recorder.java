@@ -57,7 +57,8 @@ public class Recorder {
         try {
             Files.copy(input, Paths.get(outputFileName));
         } catch (java.net.SocketTimeoutException ex) {
-
+            LOG.log(Level.SEVERE, "Cannot write to file/timeout {0}", outputFileName);
+            throw new IllegalStateException(ex);
         } catch (IOException ex) {
             LOG.log(Level.SEVERE, "Cannot write to file {0}", outputFileName);
             throw new IllegalStateException(ex);

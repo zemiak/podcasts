@@ -21,36 +21,57 @@
                     <div class="small-2 columns">&nbsp;</div>
                 </div>
                 <div class="row">&nbsp;</div>
-                    <h:form id="podcasts">
-                        <ui:repeat var="item" value="#{podcastsForm.all}">
-                            <div class="row">
-                                <div class="small-4 columns">
-                                    <a href="#{request.contextPath}/feed.jsp?name=${item.name}">
-                                        #{item.prettyTitle}
-                                    </a>
-                                </div>
-
-                                <div class="small-2 columns">
-                                    <h:inputText value="#{item.cronExpression}" id="cron" />
-                                </div>
-
-                                <div class="small-2 columns">
-                                    <h:inputText value="#{item.durationSeconds}" id="duration" />
-                                </div>
-
-                                <div class="small-1 columns">
-                                    <h:commandButton class="button tiny" action="#{podcastsForm.save(item.name)}" value="Update" />
-                                </div>
-
-                                <div class="small-1 columns">
-                                    <h:commandButton class="button tiny" action="#{podcastsForm.disable(item.name)}" value="Disable" rendered="#{item.enabled}" />
-                                    <h:commandButton class="button tiny" action="#{podcastsForm.enable(item.name)}" value="Enable" rendered="#{item.disabled}" />
-                                </div>
-
-                                <div class="small-2 columns">&nbsp;</div>
+                <h:form id="podcasts">
+                    <ui:repeat var="item" value="#{podcastsForm.all}">
+                        <div class="row">
+                            <div class="small-4 columns">
+                                <a href="#{request.contextPath}/feed.jsp?name=${item.name}">
+                                    #{item.prettyTitle}
+                                </a>
                             </div>
-                        </ui:repeat>
-                    </h:form>
+
+                            <div class="small-2 columns">
+                                <h:inputText value="#{item.cronExpression}" id="cron" />
+                            </div>
+
+                            <div class="small-2 columns">
+                                <h:inputText value="#{item.durationSeconds}" id="duration" />
+                            </div>
+
+                            <div class="small-1 columns">
+                                <h:commandButton class="button tiny" action="#{podcastsForm.save(item.name)}" value="Update" />
+                            </div>
+
+                            <div class="small-1 columns">
+                                <h:commandButton class="button tiny" action="#{podcastsForm.disable(item.name)}" value="Disable" rendered="#{item.enabled}" />
+                                <h:commandButton class="button tiny" action="#{podcastsForm.enable(item.name)}" value="Enable" rendered="#{item.disabled}" />
+                            </div>
+
+                            <div class="small-2 columns">&nbsp;</div>
+                        </div>
+                    </ui:repeat>
+                </h:form>
+                
+                <div class="row">&nbsp;</div>
+                <div class="row header">
+                    <div class="small-4 columns">Currently Recording</div>
+                    <div class="small-4 columns">Nearest Recording</div>
+                    <div class="small-4 columns">When</div>
+                </div>
+                
+                <div class="row">
+                    <div class="small-4 columns">
+                        #{podcastsForm.recording.name}
+                    </div>
+                
+                    <div class="small-4 columns">
+                        #{podcastsForm.nearest.name}
+                    </div>
+
+                    <div class="small-4 columns">
+                        #{podcastsForm.nearestTime}
+                    </div>
+                </div>
             </div>
         </ui:define>
     </ui:composition>
