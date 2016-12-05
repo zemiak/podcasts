@@ -15,9 +15,13 @@ echo "AS_ADMIN_NEWPASSWORD=admin" >> payarapwd
 bin/asadmin --user=admin --passwordfile=payarapwd change-admin-password || exit 2
 echo "AS_ADMIN_PASSWORD=admin" > payarapwd
 
-DB_SERVER="zemiak-retina-macbook.local"
+export MEDIA_PATH=/Volumes/media/inbox
+export RADIO_FM_URL=http://live.slovakradio.sk:8000/FM_128.mp3
+export MAIL_TO=zemiak@gmail.com
+
 bin/asadmin --user=admin --passwordfile=payarapwd create-javamail-resource --mailuser none --fromaddress noreply@nowhere.com --mailhost 192.168.2.10 mail/podcasts
 bin/asadmin --user=admin --passwordfile=payarapwd enable-secure-admin
 bin/asadmin --user=admin --passwordfile=payarapwd stop-domain domain1
+bin/asadmin --user=admin --passwordfile=payarapwd start-domain domain1 --debug
 rm payarapwd
 cd "$SAVE"

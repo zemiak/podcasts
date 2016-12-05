@@ -15,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;
 import org.farng.mp3.TagNotFoundException;
@@ -25,8 +24,7 @@ import org.farng.mp3.id3.ID3v1_1;
 public class EpisodeService {
     private static final Logger LOG = Logger.getLogger(EpisodeService.class.getName());
 
-    @Inject
-    private String path;
+    private final String path = ConfigurationProvider.getPath();
 
     private static final byte GENRE = (byte) 101;
     private static final String ARTIST = "Radio_FM";

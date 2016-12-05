@@ -21,23 +21,15 @@ import javax.mail.internet.MimeMessage;
 public class RecordService {
     private static final Logger LOG = Logger.getLogger(RecordService.class.getName());
 
-    @Inject
-    String radioFmUrl;
-
-    @Inject
-    EpisodeService service;
+    @Inject EpisodeService service;
 
     @Resource(name = "mail/podcasts")
     private Session mailSession;
 
-    @Inject
-    String mailFrom;
-
-    @Inject
-    String mailTo;
-
-    @Inject
-    String mailSubject;
+    final String radioFmUrl = ConfigurationProvider.getRadioFmUrl();
+    final String mailFrom = "noreply@podcasts.zemiakbox.com";
+    final String mailTo = ConfigurationProvider.getMailTo();
+    final String mailSubject = "Podcasts Download";
 
     Date now;
 

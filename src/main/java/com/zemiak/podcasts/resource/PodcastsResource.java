@@ -16,14 +16,11 @@ import javax.ws.rs.core.Response;
 @Produces("application/json")
 @Consumes("application/json")
 public class PodcastsResource {
-    @Inject
-    PodcastService podcasts;
+    @Inject PodcastService podcasts;
 
-    @Inject
-    EpisodeService episodes;
+    @Inject EpisodeService episodes;
 
-    @Inject
-    RecordService recorder;
+    @Inject RecordService recorder;
 
     @GET
     public List<Podcast> getAllPodcasts() {

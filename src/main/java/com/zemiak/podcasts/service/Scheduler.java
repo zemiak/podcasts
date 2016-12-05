@@ -16,14 +16,9 @@ import javax.inject.Inject;
 public class Scheduler {
     private static final Logger LOG = Logger.getLogger(Scheduler.class.getName());
 
-    @Inject
-    RecordService recordService;
-
-    @Inject
-    PodcastService podcastService;
-
-    @Inject
-    PodcastRemovalService removalService;
+    @Inject RecordService recordService;
+    @Inject PodcastService podcastService;
+    @Inject PodcastRemovalService removalService;
 
     @Resource
     TimerService timerService;

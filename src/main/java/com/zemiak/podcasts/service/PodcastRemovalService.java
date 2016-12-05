@@ -10,14 +10,12 @@ import java.nio.file.attribute.FileTime;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.inject.Inject;
 
 public class PodcastRemovalService {
     private static final long DAY = 1000 * 3600 * 24;
     private static final Logger LOG = Logger.getLogger(PodcastRemovalService.class.getName());
 
-    @Inject
-    private String path;
+    private final String path = ConfigurationProvider.getPath();
 
     public void removeOldPodcasts() {
         // find . -type f -mtime +31 -delete

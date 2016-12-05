@@ -18,11 +18,8 @@ import javax.inject.Named;
 @Named("podcastsForm")
 @RequestScoped
 public class PodcastsForm {
-    @Inject
-    PodcastService service;
-
-    @Inject
-    Scheduler scheduler;
+    @Inject PodcastService service;
+    @Inject Scheduler scheduler;
 
     FacesContext faces;
 

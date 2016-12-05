@@ -20,11 +20,7 @@ package com.zemiak.podcasts.servlet;
 import com.zemiak.podcasts.domain.Episode;
 import com.zemiak.podcasts.service.CDILookup;
 import com.zemiak.podcasts.service.PodcastService;
-import java.io.Closeable;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,12 +39,10 @@ public class StreamingServlet extends HttpServlet {
     private static final long DEFAULT_EXPIRE_TIME = 604800000L; // ..ms = 1 week.
     private static final String MULTIPART_BOUNDARY = "MULTIPART_BYTERANGES";
 
-    private String basePath;
     private PodcastService service;
 
     @Override
     public void init() throws ServletException {
-        this.basePath = new CDILookup().lookup(ServletConfiguration.class).getPath();
         this.service = new CDILookup().lookup(PodcastService.class);
     }
 

@@ -1,42 +1,38 @@
 package com.zemiak.podcasts.service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-@Singleton
-@Startup
-public class ConfigurationProvider {
-    private final Map<String, String> configuration = new HashMap<>();
-
-    @PostConstruct
-    public void readConfiguration() {
-	ResourceBundle props = ResourceBundle.getBundle("config");
-
-        props.keySet().stream().forEach((key) -> {
-            configuration.put(key, props.getString(key));
-        });
-    }
-
-    @Produces
-    public String getString(InjectionPoint point) {
-        String fieldName = point.getMember().getName();
-        String valueForFieldName = configuration.get(fieldName);
-        return valueForFieldName;
-    }
-
-    @Produces
-    public int getInt(InjectionPoint point) {
-        String stringValue = getString(point);
-        if (stringValue == null) {
-            return 0;
+/**
+ * Needed ENV keys are listed below.
+ *
+ * MEDIA_PATH
+ * MAIL_TO
+ * RADIO_FM_URL
+ */
+public final class ConfigurationProvider {
+    private static String get(String key) {
+        String value = System.getenv(key);
+        if (null == value || value.trim().isEmpty()) {
+            throw new IllegalStateException("Missing configuration " + key);
         }
 
-        return Integer.parseInt(stringValue);
+        return value;
+    }
+
+    private static Path getBasePath() {
+        return Paths.get(get("MEDIA_PATH"));
+    }
+
+    public static String getPath() {
+        return getBasePath().toString();
+    }
+
+    public static String getRadioFmUrl() {
+        return get("RADIO_FM_URL");
+    }
+
+    public static String getMailTo() {
+        return get("MAIL_TO");
     }
 }
