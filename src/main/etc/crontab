@@ -1,0 +1,2 @@
+03 18 * * 5 balaz_hubinak.sh
+15 1 * * * remove-old-podcasts.sh
