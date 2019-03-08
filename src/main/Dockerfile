@@ -1,7 +1,6 @@
-FROM centos:7
+FROM debian:jessie
 
-RUN yum -y install epel-release && \
-    yum -y install php sendemail python-six httpd && \
+RUN apt update && apt -y install php5 sendemail python-six apache2 curl && \
     mkdir -p /mnt/media/inbox && \
     ln -s /mnt/media/inbox/ /var/www/html/podcasts
 
@@ -14,4 +13,4 @@ RUN chmod +x /usr/local/bin/*
 VOLUME /mnt/media/inbox
 EXPOSE 80
 
-CMD httpd && devcron.py /etc/crontab
+CMD apachectl start && devcron.py /etc/crontab

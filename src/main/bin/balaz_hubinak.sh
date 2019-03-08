@@ -1,7 +1,7 @@
 #!/bin/sh
 
 podcast=balaz_hubinak
-date="$(date +%Y%m%d)"
+date="$(date +%y%m%d)"
 fileName="/mnt/media/inbox/${date}_${podcast}.mp3"
 length="3h"
 
